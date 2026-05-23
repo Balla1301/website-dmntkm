@@ -1,0 +1,46 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to dmntkm.com
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://dmntkm.com
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Copy deploy script to VPS
+        run: |
+          scp -i ~/.ssh/deploy_key \
+            scripts/deploy.sh \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/tmp/deploy-dmntkm.sh
+
+      - name: Run deploy script on VPS
+        run: |
+          ssh -i ~/.ssh/deploy_key \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+            "chmod +x /tmp/deploy-dmntkm.sh && /tmp/deploy-dmntkm.sh"
+
+      - name: Smoke test
+        run: |
+          sleep 5
+          curl -sSfI https://dmntkm.com/ | head -1
