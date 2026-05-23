@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #faf6ec;
+  --foreground: #0b2e1f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-7xl px-3 sm:px-4 lg:px-6;
+  }
+  .container-wide {
+    @apply mx-auto max-w-[1400px] px-3 sm:px-4 lg:px-6;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-mouride-green px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-mouride-dark focus:outline-none focus:ring-2 focus:ring-mouride-gold;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-md border border-mouride-green px-5 py-3 text-sm font-semibold text-mouride-green transition hover:bg-mouride-green hover:text-white;
+  }
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-mouride-dark;
+  }
+  .section-subtitle {
+    @apply mt-2 text-mouride-green/80;
+  }
+  .card {
+    @apply rounded-xl border border-mouride-green/10 bg-white p-6 shadow-sm transition hover:shadow-md;
+  }
+}
