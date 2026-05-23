@@ -46,19 +46,34 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────
-# 3. (Re)Copier les fichiers Docker à chaque run (idempotent)
-#    Permet de bénéficier d'une mise à jour des templates VPS.
+# 3. Arrêter un éventuel ancien conteneur (ex: site statique nginx)
+#    On utilise le nom de conteneur pour le repérer, pas le compose.
 # ─────────────────────────────────────────────────────────────
-log "Mise en place des templates Docker"
+if docker ps -a --format '{{.Names}}' | grep -q "^site-${SITE_NAME}$"; then
+  OLD_IMAGE=$(docker inspect "site-${SITE_NAME}" --format '{{.Config.Image}}' 2>/dev/null || echo "?")
+  log "Conteneur existant détecté (image: ${OLD_IMAGE}). Arrêt et suppression."
+  docker stop "site-${SITE_NAME}" >/dev/null 2>&1 || true
+  docker rm "site-${SITE_NAME}" >/dev/null 2>&1 || true
+fi
+
+# ─────────────────────────────────────────────────────────────
+# 4. (Re)Copier les fichiers Docker à chaque run (idempotent)
+#    On force le compose Next.js à chaque déploiement pour qu'un
+#    ancien compose (nginx statique, etc.) ne reste pas en place.
+# ─────────────────────────────────────────────────────────────
+log "Mise en place des templates Docker (force)"
 cp "${TEMPLATES_DIR}/nextjs.Dockerfile"      source/Dockerfile
 cp "${TEMPLATES_DIR}/nextjs.dockerignore"    source/.dockerignore
 
-if [ ! -f docker-compose.yml ]; then
-  cp "${TEMPLATES_DIR}/nextjs.docker-compose.yml" docker-compose.yml
-  sed -i "s/site-<nom>/site-${SITE_NAME}/g" docker-compose.yml
-  # Pas de .env pour ce site : on retire env_file
-  sed -i '/env_file:/,/- \.env/d' docker-compose.yml
+# Sauvegarder un ancien compose s'il existe et qu'il diffère du template
+if [ -f docker-compose.yml ] && ! grep -q "context: \./source" docker-compose.yml 2>/dev/null; then
+  mv docker-compose.yml "docker-compose.yml.backup-$(date +%Y%m%d-%H%M%S)"
 fi
+
+cp "${TEMPLATES_DIR}/nextjs.docker-compose.yml" docker-compose.yml
+sed -i "s/site-<nom>/site-${SITE_NAME}/g" docker-compose.yml
+# Pas de .env pour ce site : on retire env_file
+sed -i '/env_file:/,/- \.env/d' docker-compose.yml
 
 # ─────────────────────────────────────────────────────────────
 # 4. Build + démarrage du conteneur
