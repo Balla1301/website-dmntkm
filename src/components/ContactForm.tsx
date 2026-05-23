@@ -54,31 +54,21 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-mouride-dark">
-            Email *
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className="mt-1 w-full rounded-md border border-mouride-green/30 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mouride-gold"
-          />
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
           <label htmlFor="phone" className="block text-sm font-medium text-mouride-dark">
-            Téléphone
+            Téléphone *
           </label>
           <input
             id="phone"
             name="phone"
             type="tel"
+            required
+            placeholder="+221 ..."
             className="mt-1 w-full rounded-md border border-mouride-green/30 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-mouride-gold"
           />
         </div>
+      </div>
+
+      <div>
         <div>
           <label htmlFor="subject" className="block text-sm font-medium text-mouride-dark">
             Sujet *

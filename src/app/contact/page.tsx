@@ -1,6 +1,14 @@
 import PageHeader from "@/components/PageHeader";
 import ContactForm from "@/components/ContactForm";
-import { MapPinIcon, PhoneIcon, MailIcon, ClockIcon } from "@/components/Icons";
+import AdhesionSection from "@/components/AdhesionSection";
+import { MapPinIcon, PhoneIcon, ClockIcon } from "@/components/Icons";
+
+const phones = [
+  "+221 77 312 79 04",
+  "+221 77 406 74 59",
+  "+221 78 469 03 21",
+  "+221 77 385 54 77",
+];
 
 export default function ContactPage() {
   return (
@@ -26,6 +34,8 @@ export default function ContactPage() {
                   <br />
                   <strong>Unité 6</strong>
                   <br />
+                  Près du Bloc scientifique
+                  <br />
                   Dakar, Sénégal
                 </p>
               </div>
@@ -41,25 +51,18 @@ export default function ContactPage() {
                 <h3 className="font-display text-lg font-bold text-mouride-dark">
                   Téléphone
                 </h3>
-                <p className="mt-1 text-sm text-mouride-dark/80">
-                  +221 — à compléter
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="flex items-start gap-3">
-              <div className="h-10 w-10 rounded-lg bg-mouride-green/10 text-mouride-green flex items-center justify-center shrink-0">
-                <MailIcon className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-bold text-mouride-dark">
-                  Email
-                </h3>
-                <p className="mt-1 text-sm text-mouride-dark/80 break-all">
-                  contact@dahira-madjmahoun-nourayni.sn
-                </p>
+                <ul className="mt-1 space-y-1 text-sm text-mouride-dark/80">
+                  {phones.map((p) => (
+                    <li key={p}>
+                      <a
+                        href={`tel:${p.replace(/\s/g, "")}`}
+                        className="hover:text-mouride-green font-medium"
+                      >
+                        {p}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -97,6 +100,10 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <div className="bg-mouride-cream/60 border-y border-mouride-green/10">
+        <AdhesionSection />
+      </div>
     </>
   );
 }

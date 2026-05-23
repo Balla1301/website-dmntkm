@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Hero from "@/components/Hero";
+import AdhesionSection from "@/components/AdhesionSection";
 import {
   MosqueIcon,
   HandshakeIcon,
@@ -228,6 +229,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Adhésion */}
+      <AdhesionSection />
 
       {/* Siège social */}
       <section className="container-wide py-16">

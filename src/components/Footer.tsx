@@ -1,6 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPinIcon, MailIcon, PhoneIcon } from "./Icons";
+import { MapPinIcon, PhoneIcon } from "./Icons";
+
+const phones = [
+  "+221 77 312 79 04",
+  "+221 77 406 74 59",
+  "+221 78 469 03 21",
+  "+221 77 385 54 77",
+];
 
 export default function Footer() {
   return (
@@ -44,16 +51,22 @@ export default function Footer() {
               <span>
                 Keur Massar — Parcelles Assainies, Unité 6
                 <br />
+                Près du Bloc scientifique
+                <br />
                 Dakar, Sénégal
               </span>
             </li>
             <li className="flex gap-2">
-              <MailIcon className="w-4 h-4 text-mouride-gold shrink-0 mt-0.5" />
-              <span className="break-all">contact@dahira-madjmahoun-nourayni.sn</span>
-            </li>
-            <li className="flex gap-2">
               <PhoneIcon className="w-4 h-4 text-mouride-gold shrink-0 mt-0.5" />
-              <span>+221 — à compléter</span>
+              <div className="space-y-0.5">
+                {phones.map((p) => (
+                  <div key={p}>
+                    <a href={`tel:${p.replace(/\s/g, "")}`} className="hover:text-mouride-gold">
+                      {p}
+                    </a>
+                  </div>
+                ))}
+              </div>
             </li>
           </ul>
         </div>

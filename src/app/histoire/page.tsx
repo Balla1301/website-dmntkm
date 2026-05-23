@@ -112,9 +112,9 @@ export default function HistoirePage() {
           <ul className="space-y-2">
             {[
               "Les récitations hebdomadaires des Khassidas de Serigne Touba",
-              "Les Hadras et Wazifas dans le souvenir d'Allah (dhikr)",
-              "La célébration du Magal de Touba et du Magal de Porokhane",
-              "Le Gamou (Mawlid) et les nuits spirituelles",
+              "La nuit du Laylatoul Khadr",
+              "Le Ziar auprès du Khalife",
+              "La vivification des journées et nuits sous la recommandation du Khalife",
               "Les actions de bienfaisance envers les familles de Keur Massar",
             ].map((it) => (
               <li key={it} className="flex gap-2">

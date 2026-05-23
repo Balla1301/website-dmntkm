@@ -11,6 +11,7 @@ const navigation = [
   { href: "/activites", label: "Activités" },
   { href: "/galerie", label: "Galerie" },
   { href: "/contact", label: "Contact" },
+  { href: "/#adhesion", label: "Adhérer", cta: true },
 ];
 
 export default function Header() {
@@ -34,7 +35,11 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-mouride-dark hover:text-mouride-gold transition"
+              className={
+                item.cta
+                  ? "text-sm font-semibold bg-mouride-gold text-mouride-dark px-4 py-2 rounded-md hover:bg-mouride-dark hover:text-white transition"
+                  : "text-sm font-medium text-mouride-dark hover:text-mouride-gold transition"
+              }
             >
               {item.label}
             </Link>

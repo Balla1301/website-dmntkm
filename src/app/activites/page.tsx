@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
 import {
   CoffeeIcon,
@@ -13,6 +14,7 @@ const projects = [
     title: "Café Touba",
     tagline: "Une boisson, une tradition",
     Icon: CoffeeIcon,
+    image: "/cafe-vente.jpg",
     description:
       "Notre Daara produit et commercialise du Café Touba selon la recette traditionnelle, riche en poivre de Selim (djar). Une activité qui finance nos projets spirituels et sociaux.",
     points: [
@@ -25,6 +27,7 @@ const projects = [
     title: "Location de Sonorisation & Audiovisuel",
     tagline: "Pour vos cérémonies et événements",
     Icon: SpeakerIcon,
+    image: "/audio-sonno.jpg",
     description:
       "La Daara met à disposition un parc complet de matériel audiovisuel : enceintes, micros, tables de mixage, projecteurs et écrans pour vos Magal, Gamou, mariages et baptêmes.",
     points: [
@@ -37,6 +40,7 @@ const projects = [
     title: "Location de Bâches & Tentes",
     tagline: "Accueillez vos invités avec dignité",
     Icon: TentIcon,
+    image: null,
     description:
       "Bâches, tentes, chaises et tables : tout ce qu'il faut pour accueillir confortablement vos invités lors de vos cérémonies religieuses ou familiales.",
     points: [
@@ -49,6 +53,7 @@ const projects = [
     title: "Location de Matériel de Cuisine",
     tagline: "Pour cuisiner pour la communauté",
     Icon: PotIcon,
+    image: null,
     description:
       "Grandes marmites, ustensiles, bouteilles de gaz : nous louons le matériel nécessaire pour préparer les repas collectifs lors des Magal, Gamou et cérémonies familiales.",
     points: [
@@ -75,8 +80,20 @@ export default function ActivitesPage() {
               idx % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
             }`}
           >
-            <div className="aspect-video rounded-2xl bg-gradient-to-br from-mouride-green/15 to-mouride-gold/15 border border-mouride-green/20 flex items-center justify-center">
-              <p.Icon className="w-28 h-28 text-mouride-green/80" strokeWidth={1.2} />
+            <div className="aspect-video rounded-2xl overflow-hidden border border-mouride-green/20 relative bg-gradient-to-br from-mouride-green/15 to-mouride-gold/15">
+              {p.image ? (
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p.Icon className="w-28 h-28 text-mouride-green/80" strokeWidth={1.2} />
+                </div>
+              )}
             </div>
             <div>
               <p className="text-sm uppercase tracking-wider font-semibold text-mouride-gold">
