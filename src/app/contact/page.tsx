@@ -6,7 +6,7 @@ import { MapPinIcon, PhoneIcon, ClockIcon } from "@/components/Icons";
 const phones = [
   "+221 77 312 79 04",
   "+221 77 406 74 59",
-  "+221 78 469 03 21",
+  "+221 78 496 03 21",
   "+221 77 385 54 77",
 ];
 
