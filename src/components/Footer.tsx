@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MapPinIcon, PhoneIcon } from "./Icons";
+import SocialLinks from "./SocialLinks";
 
 const phones = [
   "+221 77 312 79 04",
@@ -30,6 +31,12 @@ export default function Footer() {
             Touba Keur Massar — fondée en 2004, sous le nom béni de Serigne
             Saliou Mbacké, digne fils de Serigne Touba (RTA).
           </p>
+          <div className="mt-5">
+            <p className="text-xs uppercase tracking-wider text-mouride-gold font-semibold mb-2">
+              Suivez-nous
+            </p>
+            <SocialLinks variant="footer" />
+          </div>
         </div>
 
         <div>

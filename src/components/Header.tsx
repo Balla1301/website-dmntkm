@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "./Logo";
+import SocialLinks from "./SocialLinks";
 
 const navigation = [
   { href: "/", label: "Accueil" },
@@ -30,7 +31,7 @@ export default function Header() {
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-5">
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -44,6 +45,8 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
+          <span className="h-6 w-px bg-mouride-green/20 mx-1" />
+          <SocialLinks variant="header" />
         </nav>
 
         <button
@@ -74,6 +77,9 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            <div className="pt-3 border-t border-mouride-green/10">
+              <SocialLinks variant="header" />
+            </div>
           </div>
         </div>
       )}
